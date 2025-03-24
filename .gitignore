@@ -3,4 +3,6 @@ autoloader.php
 /other
 /script_test
 /administract
-/assets/img
+*.jpeg
+*.jpg
+*.png
