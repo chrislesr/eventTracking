@@ -7,3 +7,5 @@ autoloader.php
 *.jpg
 *.png
 !assets/img/photoAffiche/dafault.png
+!assets/img/photoProfil/dafault.png
+!assets/img/photoProfil/default.JPG
