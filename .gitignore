@@ -6,3 +6,4 @@ autoloader.php
 *.jpeg
 *.jpg
 *.png
+!assets/img/photoAffiche/dafault.png

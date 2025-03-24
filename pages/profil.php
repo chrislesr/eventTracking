@@ -1,8 +1,9 @@
 <?php
 	include "header.php";
   $id = htmlspecialchars($_SESSION['id_user'],ENT_QUOTES, 'UTF-8');
-  $id_evenement = $_SESSION['usersInfo']['id_env'];
+  
   if($_SESSION['niveau']=='LEVEL_NIV4'){
+    $id_evenement = $_SESSION['usersInfo']['id_env'];
     $dataUser = getUsers($id,$conn);
     $name = htmlspecialchars($dataUser['nom_utl'],ENT_QUOTES, 'UTF-8');
     $lastname = htmlspecialchars($dataUser['postnom_utl'],ENT_QUOTES, 'UTF-8');
@@ -42,6 +43,7 @@
 
     <!-- Stats Section -->
     <!-- Modal -->
+    <?php if($_SESSION['niveau']=='LEVEL_NIV4'){?>
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
           <div class="modal-content">
@@ -88,6 +90,7 @@
         </div>
       </div>
       <!-- END Modal -->
+  <?php }?>
     <section id="stats" class="stats section dark-background">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -115,6 +118,7 @@
                   <li><i class="bi bi-calendar"></i> <?= date('d-m-Y')?> <i class="bi bi-clock"></i> <?= date('H:i')?></li>
                 </ul>
               </div>
+              <?php if($_SESSION['niveau']=='LEVEL_NIV4'){?>
               <div class="col-lg-6 col-md-6 border">
                 <div class="row py-2 text-center">
                   
@@ -128,6 +132,7 @@
                   </div>
                 </div>
               </div>
+            <?php }?>
             </div>
            </div><!-- End Stats Item -->
         </div>
