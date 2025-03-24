@@ -1,0 +1,85 @@
+.scanner_qr,.scanner_rfid{
+	overflow: hidden;
+	height: 450px;
+	transition: 0.2s;
+}
+
+.scanner_qr h1,.scanner_rfid h1{
+	font-size: 21px;
+	margin-bottom: 15px;
+}
+.scanner_qr h1 i,.scanner_rfid h1 i{
+	font-size: x-large;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.scanner_qr h1 .fa-camera{
+	color: #0283d8;
+}
+
+.scanner_qr h1 .fa-circle-stop{
+	color: crimson;
+	display: none;
+}
+.scanbar-form{
+	height: 225px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center; 
+	border-radius: 5px;
+	cursor: pointer;
+	border: 2px dashed #777;
+}
+.scanbar .img_scan{
+	position: relative;
+	height: 300px;
+
+	background: url("../../icons8-scanner.gif")no-repeat;
+	background-size: 300px;
+	background-position: center;
+	border: 2px dashed #777;
+}
+/*.scanbar .qr-readeractive{
+
+	height: 300px;
+	text-align: center; 
+	border-radius: 5px;
+	cursor: pointer;
+	border: 2px dashed #777;
+	
+}*/
+
+.scanbar-details textarea{
+	color: #333;
+	width: 100%;
+	height: 150px;
+	padding: 10px 15px;
+	margin-top: 10px;
+	outline: none;
+	font-size: 16px;
+	resize: none;
+	border-radius: 5px;
+}
+.scanner_qr i.bi-camera{
+	padding: 0.6rem;
+	font-size: 1.6rem;
+	color: #0283d8;
+	border-radius: 50%;
+	/*font-size: 1.6rem;
+	color: #0283d8;
+	position: relative;
+	border-radius: 50%;*/
+}
+.scanner_qr i.bi-stop-circle{
+	
+	padding: 0.6rem;
+	font-size: 1.6rem;
+	color: red;
+	/*display: block;
+	position: absolute;
+	bottom: 19rem;
+	left: 11rem;*/
+	border-radius: 50%;*/
+}

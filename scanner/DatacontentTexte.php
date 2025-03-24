@@ -1,0 +1,1 @@
+<?php $Dresult ='MT5986234582548'; echo $Dresult ; ?>
