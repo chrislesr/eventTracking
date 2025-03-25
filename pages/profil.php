@@ -35,70 +35,21 @@
   }
 ?>
 <?php 
-  if (!isset($_SESSION['token_csrf'])) {
-    $_SESSION['token_csrf'] = bin2hex(random_bytes(32));
+  if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    $csrf_token = $_SESSION['csrf_token'];
 }
 ?>
 <main class="main">
-
+<form id="myform">
+  <input type="hidden" id="token_csrf" value="<?php echo $_SESSION['csrf_token']; ?>">
+</form>
     <!-- Stats Section -->
-    <!-- Modal -->
-    <?php if($_SESSION['niveau']=='LEVEL_NIV4'){?>
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Notifications</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Nom Participant</th>
-                    <th>Opérateur</th>
-                    <th>Date d'enrégistrement</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php 
-                   $result = getNotifications($id_evenement,$conn);
-                      foreach ($result as $aff) {
-                            if(empty($aff['id_util_ops_part_fk'])){
-                              $id_ops = $aff['id_cmt_osp_part_fk'];
-                              $result1 = getComiteAll($id_ops,$conn);
-                            }else{
-                              $id_ops = $aff['id_util_ops_part_fk'];
-                              $result1 = getUsersAll($id_ops,$conn);
-                            }
-                        foreach($result1 as $aff1){
-                           echo '<tr>';
-                           echo '<td>'.$aff['nom_part'].'</td>';
-                           echo '<td>'.$aff1['ops'].'</td>';
-                           echo '<td>'.date('d-m-Y H:i:s',strtotime($aff['date_enreg_part'])).'</td>';
-                           echo '</tr>';
-                          }
-                      }
-                  ?>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- END Modal -->
-  <?php }?>
+    
     <section id="stats" class="stats section dark-background">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 		  <br>
-
-      <form id="myform">
-          <input type="hidden" id="token_csrf" value="<?php echo $_SESSION['token_csrf']; ?>">
-      </form>
         <div class="row gy-4">
           <div class="col-lg-3 col-md-6">
             <div class="row d-flex align-items-center w-100 h-100">
@@ -123,7 +74,11 @@
                 <div class="row py-2 text-center">
                   
                   <div class="col-lg-4 col-md-6">
-                    <p class="messenger-profil" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="cursor: pointer;"><i class="bi bi-bell-fill fs-2"></i><span id="nbrenotification">5</span></p>
+                    <p class="messenger-profil"><a href="#"><i class="bi bi-messenger fs-2"></i></a></p>
+                    <p>Message</p>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                    <p class="messenger-profil"><a href="#"><i class="bi bi-bell-fill fs-2"></i></a></p>
                     <p>Notification</p>
                   </div>
                   <div class="col-lg-4 col-md-6">
@@ -350,43 +305,3 @@
   include 'footer.php';
 ?>
 <script src="../assets/js/script_profil.js"></script>
-<script>
-  async function fetchNotifications() {
-    try {
-        // Préparer les données avec le token CSRF
-        const csrfToken = document.getElementById('token_csrf').value;
-
-        const response = await fetch('notifications.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                token_csrf: csrfToken, // Inclure le token CSRF
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error('Erreur serveur : ' + response.status);
-        }
-
-        const data = await response.json(); // Parse la réponse JSON
-
-        // Mettre à jour les éléments HTML
-        if (data.nbrenotification !== undefined) {
-            document.getElementById('nbrenotification').textContent = data.nbrenotification;
-        }
-
-        // Optionnel : Mettre à jour le token CSRF si le serveur en renvoie un nouveau
-        if (data.token_csrf) {
-            document.getElementById('token_csrf').value = data.token_csrf;
-        }
-    } catch (error) {
-        console.error('Erreur lors de la récupération des données :', error);
-    }
-}
-
-// Charger les données au démarrage et toutes les 5 secondes
-fetchNotifications();
-setInterval(fetchNotifications, 5000);
-</script>

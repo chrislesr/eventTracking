@@ -1913,7 +1913,7 @@ section,
   .info-profil{
     list-style: none;
   }
-  .messenger-profil{
+  .messenger-profil,.icon-nav{
     position: relative;
   }
   .messenger-profil a{
@@ -1931,6 +1931,17 @@ section,
     height: 25px;
     border-radius: 50%;
     font-weight: bold;
+  }
+  .icon-nav span{
+    position: absolute;
+    left: 60%;
+    color: #fff;
+    background: red;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-weight: bold;
+    text-align: center;
   }
   .menu-profil{
     position: absolute;

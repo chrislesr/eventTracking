@@ -16,6 +16,15 @@ if(isset($_SERVER['HTTP_REFERER'])){
 $_SESSION['previous_url'] = $_SERVER['HTTP_REFERER'];
 }
 ?>
+<?php 
+if($_SESSION['niveau']=='LEVEL_NIV4'){
+    $id_evenement = $_SESSION['usersInfo']['id_env'];
+  }
+  if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    $csrf_token = $_SESSION['csrf_token'];
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -108,22 +117,21 @@ $_SESSION['previous_url'] = $_SERVER['HTTP_REFERER'];
               echo '<li><a href="Scanning">Scanner</a></li>';
             }
           }?>
-          <li><a href="#contact">Contact</a></li>
+          
           <?php if(checkRole(['LEVEL_1','LEVEL_NIV4'])){?>
           <li class="dropdown"><a href="#"><span>Paramètre</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="about">Apropos</a></li>
               <li><a href="profil">Mon Profil</a></li>
-              <li><a href="about">Rapport</a></li>
-              <li><a href="about">Paramètre</a></li>
+              <li><a href="rapports">Rapport</a></li>
             </ul>
           </li>
+          <li class="icon-nav" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="cursor: pointer;"><i class="bi bi-bell-fill fs-3"></i><span id="nbrenotification">5</span></li>
         <?php }?>
         <?php if(checkRole(['LEVEL_NIV1'])){?>
           <li class="dropdown"><a href="#"><span>Paramètre</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="profil">Mon Profil</a></li>
-              <li><a href="about">Rapport</a></li>
+              <li><a href="rapports">Rapport</a></li>
             </ul>
           </li>
         <?php }?>
@@ -134,5 +142,9 @@ $_SESSION['previous_url'] = $_SERVER['HTTP_REFERER'];
 
     </div>
   </header>
+  <?php include "includ-modal.php";?>
+<form id="myform">
+  <input type="hidden" id="token_csrf" value="<?php echo $_SESSION['csrf_token']; ?>">
+</form>
 
- 
+ <script src="../assets/js/script-notification.js"></script>
