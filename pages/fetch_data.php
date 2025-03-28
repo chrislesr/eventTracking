@@ -12,7 +12,7 @@ $rowsPerPage = isset($_GET['rowsPerPage']) ? intval($_GET['rowsPerPage']) : 10;
 $offset = ($page - 1) * $rowsPerPage;
 $conditions = [];
 $searchs = isset($_GET['search']) ? $_GET['search'] : '';
-
+ 
 if (!empty($searchs)) {
     $querySearch = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING);
     $querySearch = htmlspecialchars(trim($querySearch), ENT_QUOTES, 'UTF-8');
@@ -29,6 +29,9 @@ if (!empty($searchs)) {
         else if($control == 'categorie'){
             $conditions[] = "(nom_categorie LIKE '%$term%' OR DATE_FORMAT(date_enreg_cat, '%d-%m-%Y') LIKE '%$term%')";
         }
+        else if($control == 'notification'){
+            $conditions[] = "(nom_part LIKE '%$term%' OR DATE_FORMAT(date_enreg_part, '%d-%m-%Y') LIKE '%$term%')";
+        }
     }
 } else {
     if ($control == 'invitation') {
@@ -39,6 +42,9 @@ if (!empty($searchs)) {
     }
     else if($control == 'categorie'){
         $conditions[] = "nom_categorie != ''";
+    }
+    else if($control == 'notification'){
+        $conditions[] = "nom_part != ''";
     }
 }
 
@@ -120,6 +126,34 @@ else if ($control == 'categorie') {
     // Requête pour obtenir les données
     if(checkRole(['LEVEL_1','LEVEL_NIV4'])){
     $sql = "SELECT nom_categorie,titre_evenement,DATE_FORMAT(date_enreg_cat, '%d-%m-%Y'),id_cat_inv as id_edite,id_cat_inv as id_delete FROM categorie_inviter LEFT JOIN evenements ON categorie_inviter.id_event_ctg = evenements.id_env WHERE $conditionString LIMIT :offset, :rowsPerPage";
+    }
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->bindValue(':rowsPerPage', $rowsPerPage, PDO::PARAM_INT);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+//Notification ==================
+
+else if ($control == 'notification') {
+    if ($id_utilisateur > 0) {
+        if(checkRole(['LEVEL_1','LEVEL_NIV4'])){
+            $conditions[] = "(id_event_part_fk = $id_evenement) AND is_actif_part ='active' ";
+            }
+        }
+        $conditionString = implode(' AND ', $conditions);
+    // Requête pour obtenir le nombre total de lignes
+    $sqlTotal = "SELECT COUNT(*) AS count FROM participants WHERE $conditionString AND id_invitation_part_fk IN (SELECT id_invitation_part_fk FROM participants WHERE $conditionString GROUP BY id_invitation_part_fk HAVING COUNT(*) > 1)";
+    $stmtTotal = $conn->prepare($sqlTotal);
+    $stmtTotal->execute();
+    $totalRows = $stmtTotal->fetch(PDO::FETCH_ASSOC)['count'];
+
+    $totalPages = ceil($totalRows / $rowsPerPage);
+
+    // Requête pour obtenir les données
+    if(checkRole(['LEVEL_1','LEVEL_NIV4'])){
+    $sql = "SELECT image_part as autre_img,nom_part,etat_participant,nom_inviter,nom_utl,DATE_FORMAT(date_enreg_part, '%d-%m-%Y') FROM participants LEFT JOIN comite_organisateur ON participants.id_cmt_osp_part_fk = comite_organisateur.id_inviter LEFT JOIN utilisateurs ON participants.id_util_ops_part_fk = utilisateurs.id_utl WHERE $conditionString AND id_invitation_part_fk IN (SELECT id_invitation_part_fk FROM participants WHERE $conditionString GROUP BY id_invitation_part_fk HAVING COUNT(*) > 1) LIMIT :offset, :rowsPerPage";
     }
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);

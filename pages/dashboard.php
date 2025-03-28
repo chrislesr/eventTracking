@@ -80,7 +80,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Services</h2>
-        <p>Featured Srvices<br></p>
+        <p>Projets future<br></p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -97,9 +97,9 @@
                   <i class="bi bi-activity"></i>
                 </div>
                 <a href="service-details.html" class="stretched-link">
-                  <h3>Nesciunt Mete</h3>
+                  <h3>Tracking event</h3>
                 </a>
-                <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis.</p>
+                <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -114,9 +114,9 @@
                   <i class="bi bi-broadcast"></i>
                 </div>
                 <a href="service-details.html" class="stretched-link">
-                  <h3>Eosle Commodi</h3>
+                  <h3>Tracking car</h3>
                 </a>
-                <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+                <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -131,7 +131,7 @@
                   <i class="bi bi-easel"></i>
                 </div>
                 <a href="service-details.html" class="stretched-link">
-                  <h3>Ledo Markt</h3>
+                  <h3>Tracking commodity</h3>
                 </a>
                 <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
               </div>

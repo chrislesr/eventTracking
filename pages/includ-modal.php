@@ -8,36 +8,31 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <table class="table table-striped">
-                <thead>
+               <div class="col-lg-6">
+                <input type="text" id="search_notif" class="form-control"  placeholder="Rechercher..."><br>
+                <input type="hidden" id="control-notif" value="notification">
+              </div>
+              
+              <table id="myTables" class="table table-scrollable" width="100%">
+                <thead class="bg-light text-center">
                   <tr>
+                    <th>Image</th>
                     <th>Nom Participant</th>
-                    <th>Opérateur</th>
+                    <th>Etat</th>
+                    <th>Ops Comite</th>
+                    <th>Ops Organisateur</th>
                     <th>Date d'enrégistrement</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php 
-                   $result = getNotifications($id_evenement,$conn);
-                      foreach ($result as $aff) {
-                            if(empty($aff['id_util_ops_part_fk'])){
-                              $id_ops = $aff['id_cmt_osp_part_fk'];
-                              $result1 = getComiteAll($id_ops,$conn);
-                            }else{
-                              $id_ops = $aff['id_util_ops_part_fk'];
-                              $result1 = getUsersAll($id_ops,$conn);
-                            }
-                        foreach($result1 as $aff1){
-                           echo '<tr>';
-                           echo '<td>'.$aff['nom_part'].'</td>';
-                           echo '<td>'.$aff1['ops'].'</td>';
-                           echo '<td>'.date('d-m-Y H:i:s',strtotime($aff['date_enreg_part'])).'</td>';
-                           echo '</tr>';
-                          }
-                      }
-                  ?>
                 </tbody>
               </table>
+              <div id="noResultsRow" style="display:none;" class="no-results mt-3">Aucun élément trouvé</div>
+              <div id="pagination" class="d-flex justify-content-center align-items-center mt-3">
+                  <i class="bi bi-chevron-left bi-lg cursor-pointer" onclick="previousPage()"></i>
+                  <span id="pageNumber"></span>
+                  <i class="bi bi-chevron-right cursor-pointer" onclick="nextPage()"></i>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

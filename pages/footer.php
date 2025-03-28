@@ -47,6 +47,7 @@
   <script src="../assets/js/script_uid.js"></script>
   <script src="../assets/js/script_qr.js"></script>
   <script src="../assets/js/alert_popup1.js"></script>
+  <script src="../assets/js/main-list-notification.js"></script>
 </body>
 
 </html>

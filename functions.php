@@ -9,7 +9,7 @@
 			return false;
 		}
 	}
-	
+	 
 	function generate_csrf()
 	{
 		$token = bin2hex(random_bytes(32));
@@ -21,7 +21,7 @@
 	{
 		$data=trim($data);
 		$data=stripcslashes($data);
-		$data=htmlspecialchars($data);
+		$data=htmlspecialchars($data,ENT_QUOTES,'UTF-8');
 		return $data;
 	}
 	//VERIFICATION 

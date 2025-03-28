@@ -125,7 +125,7 @@ if($_SESSION['niveau']=='LEVEL_NIV4'){
               <li><a href="rapports">Rapport</a></li>
             </ul>
           </li>
-          <li class="icon-nav" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="cursor: pointer;"><i class="bi bi-bell-fill fs-3"></i><span id="nbrenotification">5</span></li>
+          <li class="icon-nav" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="cursor: pointer;"><i class="bi bi-bell-fill fs-3"></i><span id="nbrenotification"></span></li>
         <?php }?>
         <?php if(checkRole(['LEVEL_NIV1'])){?>
           <li class="dropdown"><a href="#"><span>Paramètre</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>

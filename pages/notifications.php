@@ -36,8 +36,15 @@ try {
     $id_evenement = $_SESSION['usersInfo']['id_env'];
 
     $nbreDbInvitPartic = nbreDbInvitPartic($id_evenement,$conn);
-    foreach ($nbreDbInvitPartic as $aff) {
-       $alert = $aff['nbre']; 
+    if(!empty($nbreDbInvitPartic)){
+        foreach ($nbreDbInvitPartic as $aff) {
+           $alert = $aff['nbre'];
+           if($alert > 6){
+            $alert = '6+';
+           } 
+        }
+    }else{
+        $alert = 0;
     }
     $response = 0; // Nombre de notifications
         // Nombre d'alertes
