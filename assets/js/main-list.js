@@ -125,7 +125,7 @@ var currentPage = 1;
                               img.src = "../assets/img/photoProfil/dafault.png";
                               img.alt = "profil";
                               img.style.width = "100px";
-                              console.log(imgsrc);
+                              
                           } else {
                               img.src =  "../assets/img/photoProfil/" + imgsrc;
                               img.alt = "profil";

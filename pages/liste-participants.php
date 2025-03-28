@@ -35,6 +35,7 @@
         <div class="col-lg-6">
             <input type="text" id="search_text_rfid" class="form-control"  placeholder="Rechercher..."><br>
             <input type="hidden" id="control" value="participant">
+            
         </div>
         <div class="table-responsive mt-4 p-4 wrapper rounded-3">
         <table id="myTables" class="table table-scrollable" width="100%">

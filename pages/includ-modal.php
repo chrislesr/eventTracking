@@ -8,12 +8,12 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               <div class="col-lg-6">
+               <div class="col-lg-6" hidden>
                 <input type="text" id="search_notif" class="form-control"  placeholder="Rechercher..."><br>
                 <input type="hidden" id="control-notif" value="notification">
               </div>
               
-              <table id="myTables" class="table table-scrollable" width="100%">
+              <table id="myTableNotification" class="table table-scrollable" width="100%">
                 <thead class="bg-light text-center">
                   <tr>
                     <th>Image</th>
@@ -28,11 +28,7 @@
                 </tbody>
               </table>
               <div id="noResultsRow" style="display:none;" class="no-results mt-3">Aucun élément trouvé</div>
-              <div id="pagination" class="d-flex justify-content-center align-items-center mt-3">
-                  <i class="bi bi-chevron-left bi-lg cursor-pointer" onclick="previousPage()"></i>
-                  <span id="pageNumber"></span>
-                  <i class="bi bi-chevron-right cursor-pointer" onclick="nextPage()"></i>
-              </div>
+              
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

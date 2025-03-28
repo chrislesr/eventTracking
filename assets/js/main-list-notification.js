@@ -2,7 +2,7 @@ var currentPage = 1;
         var rowsPerPage = 10;
         var totalPages = 0;
 
-        function fetchData(page) {
+        function fetchDataNotif(page) {
             var search = document.getElementById("search_notif").value;
             var controlNotif = document.getElementById("control-notif").value;
             console.log(search);
@@ -20,7 +20,7 @@ var currentPage = 1;
         }
 
         function renderTableNotif(data) {
-          var tableBody = document.getElementById("myTables").getElementsByTagName('tbody')[0];
+          var tableBody = document.getElementById("myTableNotification").getElementsByTagName('tbody')[0];
           tableBody.innerHTML = "";
           if (data.length === 0) {
               document.getElementById("noResultsRow").style.display = "";
@@ -158,23 +158,23 @@ var currentPage = 1;
 
 
 
-        function nextPage() {
+        function nextPageNotif() {
             if (currentPage < totalPages) {
                 currentPage++;
-                fetchData(currentPage);
+                fetchDataNotif(currentPage);
             }
         }
 
-        function previousPage() {
+        function previousPageNotif() {
             if (currentPage > 1) {
                 currentPage--;
-                fetchData(currentPage);
+                fetchDataNotif(currentPage);
             }
         }
 
         document.getElementById("search_notif").addEventListener("keyup", function() {
             currentPage = 1; // Reset to the first page
-            fetchData(currentPage);
+            fetchDataNotif(currentPage);
         });
 
         function showPopup(message, type) { 
@@ -183,4 +183,4 @@ var currentPage = 1;
             $('#popup').hide().removeClass('success').removeClass('danger'); 
           }, 5000); 
         }
-        fetchData(currentPage);
+        fetchDataNotif(currentPage);
